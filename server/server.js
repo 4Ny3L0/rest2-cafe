@@ -18,11 +18,12 @@ app.use(require('./rutas/usuarios.js'));
 mongoose.connect('mongodb://localhost:27017/cafe', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, (err) => {
-    if (err) {
-        return console.log(`Error intentando conectar a la base de datos ${err}`)
+},(err,resp)=>{
+    if(err){
+        throw err;
     }
-    console.log(`Conexion a la base de datos exitosa`);
+
+    console.log('Conexion Satisfactoria')
 })
 
 //=============================================

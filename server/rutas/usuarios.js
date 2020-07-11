@@ -1,7 +1,8 @@
+
 const express = require('express');
 const app = express();
 
-
+const UsuarioM = require('../models/usuarioM');
 
 // ======RUTAS==========
 
@@ -17,11 +18,29 @@ app.get('/usuarios', (req, resp) => {
 app.post('/usuario', (req, resp) => {
 
     let body = req.body;
-    resp.json({
-        ok: true,
-        usuario: body,
-        message: 'El post funciona bien'
+    let usuario = new UsuarioM({
+        nombre:body.nombre,
+        email:body.email,
+        password:body.password,
+        estado:body.estado,
+        google:body.google,
+        role:body.role
     })
+
+    usuario.save((err,usuarioCreado) =>{
+        if(err){
+            return resp.status(400).json({
+                ok:false,
+                error:err
+            })
+        }
+        resp.json({
+            ok: true,
+            usuario: usuarioCreado,
+            message: 'Usuario creado correctamente'
+        })
+    })
+   
 });
 
 
