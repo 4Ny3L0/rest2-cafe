@@ -15,7 +15,7 @@ app.use(require('./rutas/usuarios.js'));
 
 //Conexion a la base de datos con mongoose
 //========================================
-mongoose.connect('mongodb://localhost:27017/cafe', {
+mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 },(err,resp)=>{
