@@ -5,7 +5,7 @@ let URLDB;
 if (process.env.NODE_ENV == 'dev') {
     URLDB='mongodb://localhost:27017/cafe';
 }else{
-    URLDB='mongodb+srv://4Ny3L0:AgM0nG0.06.M@cluster0.aaqdn.mongodb.net/cafe'
+    URLDB=process.env.db;
 }
 DB=URLDB;
 module.exports = process.env.PORT;
