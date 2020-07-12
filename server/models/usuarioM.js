@@ -38,7 +38,12 @@ let UsuarioSchema = new Schema({
         type: String
     }
 });
+UsuarioSchema.methods.toJSON = function(){
+    let userObj = this.toObject();
+    delete userObj.password;
 
+    return userObj;
+}
 
 UsuarioSchema.plugin(mongooseV,{message:'el {PATH} ya existe, debe ser unico'})
 module.exports= mongoose.model('Usuarios',UsuarioSchema)

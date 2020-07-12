@@ -23,7 +23,7 @@ mongoose.connect(DB, {
         throw err;
     }
 
-    console.log('Conexion Satisfactoria')
+    console.log('Conexion Satisfactoria a DB')
 })
 
 //=============================================
