@@ -17,7 +17,8 @@ app.use(require('./rutas/usuarios.js'));
 //========================================
 mongoose.connect(DB, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
 },(err,resp)=>{
     if(err){
         throw err;
