@@ -11,7 +11,7 @@ app.use(body_p.urlencoded({ extended: false }))
 app.use(body_p.json())
 
 
-app.use(require('./rutas/usuarios.js'));
+app.use(require('./rutas/index'));
 
 //Conexion a la base de datos con mongoose
 //========================================
@@ -19,8 +19,8 @@ mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-},(err,resp)=>{
-    if(err){
+}, (err, resp) => {
+    if (err) {
         throw err;
     }
 
