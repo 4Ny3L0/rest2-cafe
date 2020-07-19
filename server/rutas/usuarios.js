@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const UsuarioM = require('../models/usuarioM');
 
-const { verificarToken } = require('../middlewares/autenticacion')
+const { verificarToken, verificarAdmin_ROLE } = require('../middlewares/autenticacion')
 
 // ======RUTAS==========
 
@@ -38,7 +38,7 @@ app.get('/usuarios', verificarToken, (req, res) => {
 })
 
 //POST Usado para crear usuarios
-app.post('/usuario', verificarToken, (req, res) => {
+app.post('/usuario', [verificarToken,verificarAdmin_ROLE], (req, res) => {
 
     let body = req.body;
     let usuario = new UsuarioM({
@@ -68,7 +68,7 @@ app.post('/usuario', verificarToken, (req, res) => {
 
 
 //PUT Modificar usuarios
-app.put('/usuario/:id', verificarToken, (req, res) => {
+app.put('/usuario/:id', [verificarToken,verificarAdmin_ROLE], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado'])
     UsuarioM.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioActualizado) => {
@@ -86,7 +86,7 @@ app.put('/usuario/:id', verificarToken, (req, res) => {
 })
 
 //DELETE usado para borrar registros
-app.delete('/usuario/:id', verificarToken, (req, res) => {
+app.delete('/usuario/:id', [verificarToken,verificarAdmin_ROLE], (req, res) => {
     let id = req.params.id;
     UsuarioM.findByIdAndUpdate(id, { estado: false }, (err, usuario_borrado) => {
         if (err) {
